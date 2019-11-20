@@ -29,4 +29,8 @@ public class Controller {
         return db.addRecord(place);
     }
 
+    void deletePlace(Place place){
+        db.delete(place);
+    }
+
 }

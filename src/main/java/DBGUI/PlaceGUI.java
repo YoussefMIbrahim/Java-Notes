@@ -9,7 +9,7 @@ public class PlaceGUI extends JFrame {
     private JTextField placeNameText;
     private JTextField elevationText;
     private JButton addButton;
-    private JList placeList;
+    private JList<Place> placeList;
     private JButton deleteButton;
 
     private Controller controller;
@@ -71,6 +71,19 @@ public class PlaceGUI extends JFrame {
             }else {
                 errorDialog(result);
             }
+        });
+
+        deleteButton.addActionListener(e -> {
+            Place place = placeList.getSelectedValue();
+
+            if(place == null){
+                JOptionPane.showMessageDialog(PlaceGUI.this,"Please select a place to delete");
+            }else{
+                controller.deletePlace(place);
+                List<Place> places = controller.getAllData();
+                setListData(places);
+            }
+
         });
     }
 

@@ -70,4 +70,18 @@ public class PlaceDB {
             }
         }
     }
+
+    public void delete(Place place){
+        String deleteSQL = "DELETE FROM places WHERE name = ?";
+
+        try(Connection connection = DriverManager.getConnection(DB_CONNECTION_URL);
+        PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)){
+
+            preparedStatement.setString(1, place.getName());
+            preparedStatement.execute();
+
+        }catch (SQLException sqle){
+            throw new RuntimeException(sqle);
+        }
+    }
 }
